@@ -21,31 +21,52 @@ int main()
     if (n_endptr == n_str || *n_endptr != '\0') { exit(EXIT_FAILURE); }
 
     // Write Your Code Here
+    if (n>= 1 && n <= 9){
+        if (n == 1) printf("one");
+        if (n == 2) printf("two");
+        if (n == 3) printf("three");
+        if (n == 4) printf("four");
+        if (n == 5) printf("five");
+        if (n == 6) printf("six");
+        if (n == 7) printf("seven");
+        if (n == 8) printf("eight");
+        if (n == 9) printf("nine");
+    }else if (n > 9){
+        printf("Greater than 9");
+    }else{
+        printf("Below 1");
+    }
 
     return 0;
 }
 
 char* readline() {
-    size_t alloc_length = 1024;
+    size_t alloc_length = 1;
     size_t data_length = 0;
     char* data = malloc(alloc_length);
 
     while (true) {
         char* cursor = data + data_length;
+        // printf("cursor: %s\n", cursor);
         char* line = fgets(cursor, alloc_length - data_length, stdin);
+        // printf("line: %s\n", line);
 
         if (!line) { break; }
 
         data_length += strlen(cursor);
-
+        // printf("data_length: %s", data_length);
+        // printf("alloc_length: %s", alloc_length);
         if (data_length < alloc_length - 1 || data[data_length - 1] == '\n') { break; }
-
+        printf(" qua tai, Cap phat them bo nho\n");
         size_t new_length = alloc_length << 1;
+        printf("dich bit\n");
         data = realloc(data, new_length);
+        printf("cap phat bo nho thanh cong\n");
 
         if (!data) { break; }
 
         alloc_length = new_length;
+        printf("cap nhat bo nho\n");
     }
 
     if (data[data_length - 1] == '\n') {
