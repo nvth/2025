@@ -1,0 +1,13 @@
+open catfalg - catflag will read flag from not-the-flag file 
+hacker@commands~linking-files:~$ cat /challenge/catflag
+#!/opt/pwn.college/bash
+
+fold -s <<< "About to read out the /home/hacker/not-the-flag file!"
+cat /home/hacker/not-the-flag
+/flag not perm to read but we can symlink /flag to /not-the-flag and read not-the-flag using /challenge/catflag
+
+acker@commands~linking-files:/$ ln -sf /flag /home/hacker/not-the-flag
+hacker@commands~linking-files:/$ /challenge/catflag 
+About to read out the /home/hacker/not-the-flag file!
+pwn.college{4JqlS7E6bDumaf7DF2mD8reZxWp.QX5ETN1wCN2gjNwEzW}
+hacker@commands~linking-files:/$ 

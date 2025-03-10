@@ -1,0 +1,8 @@
+
+using `find / -name flag` to find flag
+
+
+hacker@man~learning-complex-usage:~$ /challenge/challenge --printfile /flag 
+Correct argument! Here is the /flag file:
+pwn.college{IMsEqZscCeJEnXD4W7EFX5NFOXW.QX1ITO0wCN2gjNwEzW}
+hacker@man~learning-complex-usage:~$ 

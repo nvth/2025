@@ -1,0 +1,9 @@
+head over : /
+next step : cat REVGELATION  | got next clue information path - get in this path
+next step in : cat NUGGET | got next clue information path - get in this path
+next step in : cat .MEMO | got next clue information path - get in this path
+next step in : cat TEASEAR | got next clue information path - get in this path
+next step in : cat CUE | got next clue information path but dont get in, it's maybe a trap and self detruction
+next step in : cat /usr/lib/python3/dist-packages/future/DOSSIER-TRAPPED | got next clue, dont read with cd
+next step in : cat /usr/share/racket/pkgs/future-visualizer-typed/ALERT-TRAPPED | got next clue, dont read with cd
+next and next and found the flag at GIST-TRAPPED file : pwn.college{kTMCQHhjVkQ4y0XVI5dUTwa2iAR.QX5IDO0wCN2gjNwEzW} 

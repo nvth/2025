@@ -1,0 +1,44 @@
+using man -k . | grep flag to print all manpage in system  | grep flag to searching manpage which is include flag
+-------------------
+hacker@man~searching-for-manuals:/challenge$ man -k . | grep flag
+wyiuyuazvt (1)       - print the flag!
+dpkg-buildflags (1)  - returns build flags to use during package build
+Dpkg::BuildFlags (3perl) - query build flags
+fegetexceptflag (3)  - floating-point rounding and exception handling
+fesetexceptflag (3)  - floating-point rounding and exception handling
+ioctl_iflags (2)     - ioctl() operations for inode flags
+pcap-config (1)      - write libpcap compiler and linker flags to standard ou...
+security_compute_av_flags (3) - query the SELinux policy database in the kernel
+security_compute_av_flags_raw (3) - query the SELinux policy database in the ...
+set_matchpathcon_flags (3) - set flags controlling the operation of matchpath...
+set_matchpathcon_invalidcon (3) - set flags controlling the operation of matc...
+set_matchpathcon_printf (3) - set flags controlling the operation of matchpat...
+hacker@man~searching-for-manuals:/challenge$ 
+-------------------
+
+man wyiuyuazvt
+-------------------
+NAME
+       /challenge/challenge - print the flag!
+
+SYNOPSIS
+       challenge OPTION
+
+DESCRIPTION
+       Output the flag when called with the right arguments.
+
+       --fortune
+              read a fortune
+
+       --version
+              output version information and exit
+
+       --wyiuyu NUM
+              print the flag if NUM is 236
+---------------------
+
+flag
+---------------------
+hacker@man~searching-for-manuals:~$ /challenge/challenge --wyiuyu 236
+Correct usage! Your flag: pwn.college{wyiEJu2Sy-ua3J6ZQzLvV0tu_k3.QX2EDO0wCN2gjNwEzW}
+hacker@man~searching-for-manuals:~$ 

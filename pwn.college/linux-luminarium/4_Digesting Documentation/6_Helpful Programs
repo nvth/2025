@@ -1,0 +1,11 @@
+
+
+hacker@man~helpful-programs:~$ /challenge/challenge -p
+The secret value is: 736
+hacker@man~helpful-programs:~$ /challenge/challenge -g GIVE_THE_FLAG 736
+usage: a challenge to make you ask for help [-h] [--fortune] [-v]
+                                            [-g GIVE_THE_FLAG] [-p]
+a challenge to make you ask for help: error: argument -g/--give-the-flag: invalid int value: 'GIVE_THE_FLAG'
+hacker@man~helpful-programs:~$ /challenge/challenge -g 736
+Correct usage! Your flag: pwn.college{EqawB_NQno7Hy3PiV6DsOdUjhtn.QX3IDO0wCN2gjNwEzW}
+hacker@man~helpful-programs:~$ 

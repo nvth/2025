@@ -1,0 +1,16 @@
+hacker@man~help-for-builtins:/challenge$ help challenge
+challenge: challenge [--fortune] [--version] [--secret SECRET]
+    This builtin command will read you the flag, given the right arguments!
+    
+    Options:
+      --fortune		display a fortune
+      --version		display the version
+      --secret VALUE	prints the flag, if VALUE is correct
+
+    You must be sure to provide the right value to --secret. That value
+    is "UI7K0_--".
+hacker@man~help-for-builtins:/challenge$ challenge --secret UI7K0_--
+Correct! Here is your flag!
+pwn.college{UI7K0_--R4JiPueZs_CeOvIrVYk.QX0ETO0wCN2gjNwEzW}
+
+hacker@man~help-for-builtins:/challenge$ 
