@@ -1,0 +1,11 @@
+hacker@piping~redirecting-input:~$ /challenge/run < PWN
+Reading from standard input...
+Your PWN file must have the value 'COLLEGE', but I instead read: PWN
+hacker@piping~redirecting-input:~$ echo COLLEGE > PWN
+hacker@piping~redirecting-input:~$ /challenge/run < PWN
+Reading from standard input...
+Correct! You have redirected the PWN file into my standard input, and I read 
+the value 'COLLEGE' out of it!
+Here is your flag:
+pwn.college{EWn4ApM8fyJ1Lq-MIKQWHg2dbja.QXwcTN0wCN2gjNwEzW}
+hacker@piping~redirecting-input:~$ 

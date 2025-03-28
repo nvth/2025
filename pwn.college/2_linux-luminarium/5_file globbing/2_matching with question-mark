@@ -1,3 +1,5 @@
+We cannot using c , l , *
+
 hacker@globbing~matching-with-:~$ cd /?ha??enge
 hacker@globbing~matching-with-:/challenge$ ./run
 You ran me with the working directory of /challenge! Here is your flag:

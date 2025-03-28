@@ -1,0 +1,13 @@
+hacker@globbing~matching-paths-with-:~$ /challenge/run file_[absh]
+Error: you will need to specify the path to the files as part of your glob 
+argument, since they are in a different directory than your current working 
+directory!
+hacker@globbing~matching-paths-with-:~$ /challenge/run /home/hacker/challenge/files/file_[absh]
+Your expansion did not expand to the requested files (/challenge/files/file_b, 
+/challenge/files/file_a, /challenge/files/file_s, and /challenge/files/file_h). 
+Instead, it expanded to:
+/home/hacker/challenge/files/file_[absh]
+hacker@globbing~matching-paths-with-:~$ /challenge/run /challenge/files/file_[absh]
+You got it! Here is your flag!
+pwn.college{UVNeLVi1XpYco4KfATinq9rUEYQ.QX0IDO0wCN2gjNwEzW}
+hacker@globbing~matching-paths-with-:~$ 
