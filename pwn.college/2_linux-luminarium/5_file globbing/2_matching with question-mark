@@ -1,0 +1,5 @@
+hacker@globbing~matching-with-:~$ cd /?ha??enge
+hacker@globbing~matching-with-:/challenge$ ./run
+You ran me with the working directory of /challenge! Here is your flag:
+pwn.college{k7yVoTPUgkeL_uAMwAC3TPTurTs.QXyIDO0wCN2gjNwEzW}
+hacker@globbing~matching-with-:/challenge$ 

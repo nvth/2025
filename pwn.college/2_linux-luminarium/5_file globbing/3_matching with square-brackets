@@ -1,0 +1,8 @@
+hacker@globbing~matching-with-:~$ cd /challenge/
+hacker@globbing~matching-with-:/challenge$ cd files/
+hacker@globbing~matching-with-:/challenge/files$ ./run file_[absh]
+-bash: ./run: No such file or directory
+hacker@globbing~matching-with-:/challenge/files$ /challenge/run file_[absh]
+You got it! Here is your flag!
+pwn.college{k63gBJ1Zs499smTKqvSyYe6dLuc.QXzIDO0wCN2gjNwEzW}
+hacker@globbing~matching-with-:/challenge/files$ 

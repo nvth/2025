@@ -1,0 +1,11 @@
+let try somepayload 
+
+hacker@globbing~matching-with-:~$ cd /*/c
+-bash: cd: /*/c: No such file or directory
+hacker@globbing~matching-with-:~$ cd /c***
+You specified the path to 'cd' to in more than 4 characters. Disallowed!
+hacker@globbing~matching-with-:~$ cd /c**
+hacker@globbing~matching-with-:/challenge$ ./run
+You ran me with the working directory of /challenge! Here is your flag:
+pwn.college{YQ74smLdLD2SjdepXkY967NIjGp.QXxIDO0wCN2gjNwEzW}
+hacker@globbing~matching-with-:/challenge$ 

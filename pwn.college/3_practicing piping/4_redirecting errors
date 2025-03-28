@@ -1,0 +1,90 @@
+FD 0: Standard Input
+FD 1: Standard Output
+FD 2: Standard Error
+
+logging
+hacker@piping~redirecting-errors:~$ ls
+COLLEGE  Desktop  leap	myflag	not-the-flag  t  the-flag
+hacker@piping~redirecting-errors:~$ /challenge/run 2> myflag
+hacker@piping~redirecting-errors:~$ cat myflag 
+[INFO] WELCOME! This challenge makes the following asks of you:
+[INFO] - the challenge will check that output is redirected to a specific file path : myflag
+[INFO] - the challenge will check that error output is redirected to a specific file path : instructions
+[INFO] - the challenge will output a reward file if all the tests pass : /flag
+
+[HYPE] ONWARDS TO GREATNESS!
+
+[INFO] This challenge will perform a bunch of checks.
+[INFO] If you pass these checks, you will receive the /flag file.
+
+[TEST] You should have redirected my stdout to a file called myflag. Checking...
+
+[FAIL] You did not satisfy all the execution requirements.
+[FAIL] Specifically, you must fix the following issue:
+[FAIL]   You have not redirected anything for this process' stdout.
+hacker@piping~redirecting-errors:~$ /challenge/run > myflag
+[INFO] WELCOME! This challenge makes the following asks of you:
+[INFO] - the challenge will check that output is redirected to a specific file path : myflag
+[INFO] - the challenge will check that error output is redirected to a specific file path : instructions
+[INFO] - the challenge will output a reward file if all the tests pass : /flag
+
+[HYPE] ONWARDS TO GREATNESS!
+
+[INFO] This challenge will perform a bunch of checks.
+[INFO] If you pass these checks, you will receive the /flag file.
+
+[TEST] You should have redirected my stdout to a file called myflag. Checking...
+
+[PASS] The file at the other end of my stdout looks okay!
+
+[TEST] You should have redirected my stderr to instructions. Checking...
+
+[FAIL] You did not satisfy all the execution requirements.
+[FAIL] Specifically, you must fix the following issue:
+[FAIL]   You have not redirected anything for this process' stderr.
+hacker@piping~redirecting-errors:~$ /challenge/run 2> instruction
+hacker@piping~redirecting-errors:~$ /challenge/run 2> instructions
+hacker@piping~redirecting-errors:~$ /challenge/run > myflag
+[INFO] WELCOME! This challenge makes the following asks of you:
+[INFO] - the challenge will check that output is redirected to a specific file path : myflag
+[INFO] - the challenge will check that error output is redirected to a specific file path : instructions
+[INFO] - the challenge will output a reward file if all the tests pass : /flag
+
+[HYPE] ONWARDS TO GREATNESS!
+
+[INFO] This challenge will perform a bunch of checks.
+[INFO] If you pass these checks, you will receive the /flag file.
+
+[TEST] You should have redirected my stdout to a file called myflag. Checking...
+
+[PASS] The file at the other end of my stdout looks okay!
+
+[TEST] You should have redirected my stderr to instructions. Checking...
+
+[FAIL] You did not satisfy all the execution requirements.
+[FAIL] Specifically, you must fix the following issue:
+[FAIL]   You have not redirected anything for this process' stderr.
+hacker@piping~redirecting-errors:~$ cat myflag 
+hacker@piping~redirecting-errors:~$ /challenge/run > myflag 2> instructions
+hacker@piping~redirecting-errors:~$ cat myflag 
+
+[FLAG] Here is your flag:
+[FLAG] pwn.college{MSnKbmcNyx8PxoZ3M2-nO1MG4ik.QX3YTN0wCN2gjNwEzW}
+
+hacker@piping~redirecting-errors:~$ cat instruction
+[INFO] WELCOME! This challenge makes the following asks of you:
+[INFO] - the challenge will check that output is redirected to a specific file path : myflag
+[INFO] - the challenge will check that error output is redirected to a specific file path : instructions
+[INFO] - the challenge will output a reward file if all the tests pass : /flag
+
+[HYPE] ONWARDS TO GREATNESS!
+
+[INFO] This challenge will perform a bunch of checks.
+[INFO] If you pass these checks, you will receive the /flag file.
+
+[TEST] You should have redirected my stdout to a file called myflag. Checking...
+
+[FAIL] You did not satisfy all the execution requirements.
+[FAIL] Specifically, you must fix the following issue:
+[FAIL]   You have not redirected anything for this process' stdout.
+hacker@piping~redirecting-errors:~$ 
