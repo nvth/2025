@@ -1,0 +1,11 @@
+hacker@processes~starting-backgrounded-processes:~$ /challenge/run &
+[1] 335
+hacker@processes~starting-backgrounded-processes:~$ 
+
+
+Yay, you started me in the background! Because of that, this text will probably 
+overlap weirdly with the shell prompt, but you're used to that by now...
+
+Anyways! Here is your flag!
+pwn.college{8P6ABltBS2kCd34a5DaO5_6eA6y.QX5QDO0wCN2gjNwEzW}
+

@@ -1,0 +1,5 @@
+hacker@permissions~executable-files:~$ chmod 777 /challenge/run 
+hacker@permissions~executable-files:~$ /challenge/run 
+Successful execution! Here is your flag:
+pwn.college{IgaLuvIEo1PVW72jeJSt1tXHwDs.QXyEjN0wCN2gjNwEzW}
+hacker@permissions~executable-files:~$ 

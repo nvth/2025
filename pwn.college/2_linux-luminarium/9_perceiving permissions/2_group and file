@@ -1,0 +1,4 @@
+hacker@permissions~groups-and-files:~$ chgrp hacker /flag 
+hacker@permissions~groups-and-files:~$ cat /flag 
+pwn.college{Q56R7Wp4tqckeUsWfXoM1m58Qqh.QXxcjM1wCN2gjNwEzW}
+hacker@permissions~groups-and-files:~$ 

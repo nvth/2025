@@ -1,0 +1,10 @@
+hacker@processes~process-exit-codes:~$ echo $?
+0
+hacker@processes~process-exit-codes:~$ /challenge/get-code  
+Exiting with an error code!
+hacker@processes~process-exit-codes:~$ echo $?
+67
+hacker@processes~process-exit-codes:~$ /challenge/submit-code 67
+CORRECT! Here is your flag:
+pwn.college{E4m93dpYRIDTK1pNUEkl_Mk6xFx.QX5YDO1wCN2gjNwEzW}
+hacker@processes~process-exit-codes:~$ 

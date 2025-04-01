@@ -1,0 +1,4 @@
+hacker@permissions~changing-file-ownership:~$ chown hacker /flag 
+\hacker@permissions~changing-file-ownership:~$ cat /flag 
+pwn.college{wokSwYePbBExq0C36L7CFQAl6eD.QXxEjN0wCN2gjNwEzW}
+hacker@permissions~changing-file-ownership:~$ 

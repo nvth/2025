@@ -1,0 +1,10 @@
+hacker@processes~killing-processes:~$ ps aux | grep dont_run
+hacker       124  0.0  0.0   5056  3520 ?        Ss   04:15   0:00 /challenge/dont_run
+hacker       348  0.0  0.0   4200  2560 pts/0    S+   04:16   0:00 grep dont_run
+hacker@processes~killing-processes:~$ kill 124
+hacker@processes~killing-processes:~$ ps aux | grep dont_run
+hacker       350  0.0  0.0   4200  2240 pts/0    S+   04:17   0:00 grep dont_run
+hacker@processes~killing-processes:~$ /challenge/run 
+Great job! Here is your payment:
+pwn.college{42YRloGfObGKGliAPJ2ehW5HVJr.QXyQDO0wCN2gjNwEzW}
+hacker@processes~killing-processes:~$ 

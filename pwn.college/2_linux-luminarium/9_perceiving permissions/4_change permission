@@ -1,0 +1,4 @@
+hacker@permissions~changing-permissions:~$ chmod 777 /flag 
+hacker@permissions~changing-permissions:~$ cat /flag 
+pwn.college{s4Oxoot66qmWhAP5GQD1zE2x602.QXzcjM1wCN2gjNwEzW}
+hacker@permissions~changing-permissions:~$ 

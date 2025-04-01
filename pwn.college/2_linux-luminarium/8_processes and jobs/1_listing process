@@ -1,0 +1,7 @@
+hacker@processes~listing-processes:~$ ps -ef| grep /chall
+root         119       1  0 04:04 ?        00:00:00 /challenge/14245-run-21051
+hacker       342     332  0 04:04 pts/0    00:00:00 grep /chall
+hacker@processes~listing-processes:~$ /challenge/14245-run-21051
+Yahaha, you found me! Here is your flag:
+pwn.college{QRH_Y0G62l_UoL9qH-g_gAq4O8G.QX4MDO0wCN2gjNwEzW}
+Now I will sleep for a while (so that you could find me with 'ps').

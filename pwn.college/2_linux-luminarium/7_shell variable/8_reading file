@@ -1,0 +1,4 @@
+hacker@variables~reading-files:~$ read PWN < /challenge/read_me 
+You've set the PWN variable properly! As promised, here is the flag:
+pwn.college{geTI7moFqN-PXfPaiI2Enk_AKxp.QXwIDO0wCN2gjNwEzW}
+hacker@variables~reading-files:~$ 
