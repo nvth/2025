@@ -7,10 +7,10 @@ Brief introduction to the topic or problem statement.
 ## Dojos
 ### Getting Started
 ![getting started img](img/gstarted.png)
-1. [Getting Started](https://www.example.com)
-2. [Linux Luminarium](https://www.example.com)
-3. [Computing 101](https://www.example.com)
-4. [Play With Programs](https://www.example.com)
+1. [Getting Started](/pwn.college/1_welcome/getting%20started.md)
+2. [Linux Luminarium](/pwn.college/2_linux-luminarium/linux-luminarium.md)
+3. [Computing 101](#)
+4. [Play With Programs](#)
 
 ## Results
 
@@ -22,7 +22,7 @@ Summarize the key points and conclusions.
 
 ## References
 
-- [Link 1](https://www.example.com)
-- [Link 2](https://www.example.com)
+- [Link 1](#)
+- [Link 2](#)
 
 
