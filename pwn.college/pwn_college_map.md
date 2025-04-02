@@ -9,7 +9,7 @@ Brief introduction to the topic or problem statement.
 ![getting started img](img/gstarted.png)
 1. [Getting Started](/pwn.college/1_welcome/getting%20started.md)
 2. [Linux Luminarium](/pwn.college/2_linux-luminarium/linux-luminarium.md)
-3. [Computing 101](#)
+3. [Computing 101](/pwn.college/3_computing_101/computing_101.md)
 4. [Play With Programs](#)
 
 ## Results

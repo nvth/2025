@@ -1,34 +1,3 @@
-```html
-<!DOCTYPE html>
-<html>
-<head>
-<style>
-/* Style cho nút Back to Top */
-.back-to-top {
-position: fixed;
-bottom: 20px;
-right: 20px;
-background-color: #007bff;
-color: white;
-border: none;
-border-radius: 5px;
-padding: 10px 20px;
-font-size: 16px;
-cursor: pointer;
-transition: background-color 0.3s;
-}
-
-.back-to-top:hover {
-background-color: #0056b3;
-}
-</style>
-</head>
-<body>
-
-<a class="back-to-top" href="#top">Back to Top</a>
-
-<!-- Đặt id="top" ở đâu đó ở đầu trang -->
-<h1 id="top">Header</h1>
 ## Map
 [Dojos](#dojos)
 ### Content
@@ -43,7 +12,7 @@ background-color: #0056b3;
 -   [9. Perceiving permissions](#9-perceiving-permissions)
 -   [10. Untangling user](#10-untangling-users)
 -   [11. Chaining commands](#11-chaining-commands)
--   [12](#12)
+-   [12. Pondering Paths](#12-pondering-paths)
 ## Dojos
 
 ### 1. Hello hacker
@@ -78,7 +47,6 @@ If my cwd is /tmp/a/b/c, then a relative path to the file is ../my_file. The .. 
 ...
 #### 2.8. Home sweet home
 /challenge/run ~/t
-
 ### 3. Comprehending Commands
 #### 3.1. Cat not the pet but the command
 ---
@@ -130,7 +98,6 @@ About to read out the /home/hacker/not-the-flag file!
 pwn.college{4JqlS7E6bDumaf7DF2mD8reZxWp.QX5ETN1wCN2gjNwEzW}
 hacker@commands~linking-files:/$ 
 ```
-
 ### 4. Digesting Documentation
 #### 4.1. Leaning from documentation
 pwn.college{0oeD-6gomseDgFbZ_uxLhU2WZ8G.QX0ITO0wCN2gjNwEzW}
@@ -1279,7 +1246,6 @@ root@permissions~the-suid-bit:~# cat /flag
 pwn.college{Y7EyaBV43y5oVgF4u6HT9OCb9_U.QXzEjN0wCN2gjNwEzW}
 root@permissions~the-suid-bit:~# 
 ```
-
 ### 10. Untangling Users
 #### 10.1. Becoming root with su
 ```
@@ -1346,12 +1312,125 @@ quite neo vim :q > Enter
 ```
 bash x.sh
 ```
+```rs
+hacker@chaining~your-first-shell-script:~/Desktop$ bash x.sh 
+Great job, you've written your first shell script! Here is the flag:
+pwn.college{YHBylTG4dfELGWJRpINTSr4CfvL.QXxcDO0wCN2gjNwEzW}
+hacker@chaining~your-first-shell-script:~/Desktop$ 
+```
+#### 11.3. Redirecting Script Output
+```bash script
+#!/bin/bash
+
+/challenge/pwn;/challenge/college
+```
+```bash
+hacker@chaining~redirecting-script-output:~/Desktop$ bash s.sh | /challenge/solve 
+s.sh: line 1: !#/bin/bash: No such file or directory
+Correct! Here is your flag:
+pwn.college{8pqPRj-SVFbScnssC2yUrtK00F1.QX4ETO0wCN2gjNwEzW}
+hacker@chaining~redirecting-script-output:~/Desktop$ 
+```
+#### 11.4. Executable Shell Script
+```bash
+#!/bin/sh
+/challenge/solve
+```
+```bash
+hacker@chaining~executable-shell-scripts:~$ touch script.sh
+hacker@chaining~executable-shell-scripts:~$ vim script.sh
+hacker@chaining~executable-shell-scripts:~$ chmod 777 script.sh 
+hacker@chaining~executable-shell-scripts:~$ ./script.sh 
+./script.sh: line 1: !#/bin/sh: No such file or directory
+Congratulations on your shell script execution! Your flag:
+pwn.college{YPoJylK1-p9xwb3IHT2HUYhlJ3I.QX0cjM1wCN2gjNwEzW}
+hacker@chaining~executable-shell-scripts:~$ 
+```
+### 12. Pondering Paths
+#### 12.1. The Path Variable
+```bash
+//without PATH can not find ls or rm
+hacker@path~the-path-variable:~$ PATH="" 
+hacker@path~the-path-variable:~$ ls
+-bash: ls: No such file or directory
+hacker@path~the-path-variable:~$ /challenge/run 
+Trying to remove /flag...
+/challenge/run: line 4: rm: No such file or directory
+The flag is still there! I might as well give it to you!
+pwn.college{U4r0lQPRZ_DUE9jNw9gZ1-J-Mk6.QX2cDM1wCN2gjNwEzW}
+hacker@path~the-path-variable:~$ 
+```
+#### 12.2. Setting PATH
+```bash
+hacker@path~setting-path:~$ PATH=/challenge/more_commands/
+hacker@path~setting-path:~$ win
+It looks like 'win' was improperly launched. Don't launch it directly; it MUST 
+be launched by /challenge/run!
+hacker@path~setting-path:~$ /challenge/run 
+Invoking 'win'....
+Congratulations! You properly set the flag and 'win' has launched!
+pwn.college{UomkABUPzokLI-4jvsYMXbz2xx_.QX1cjM1wCN2gjNwEzW}
+hacker@path~setting-path:~$ 
+```
+#### 12.3. Adding Commands
+```vim
+#!/bin/bash
+cat /flag
+```
+```bash
+hacker@path~adding-commands:~$ vim win
+hacker@path~adding-commands:~$ chmod 777 win
+hacker@path~adding-commands:~$ echo $PATH
+/run/challenge/bin:/run/workspace/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+hacker@path~adding-commands:~$ PATH="/home/hacker:$PATH"
+hacker@path~adding-commands:~$ /challenge/run 
+Invoking 'win'....
+pwn.college{ojeBKnDROAxtfylCO4KHsWcdPfC.QX2cjM1wCN2gjNwEzW}
+hacker@path~adding-commands:~$ 
+```
+#### 12.4. Hijacking Commands
+```Solution
+Solution: When hit /challenge/run it'll call rm for delete /flag. So,
+we can try create rm at /home/hacker/, chmod 777 rm, set variable PATH and try /challenge/run again,
+IT WORK!
+```
+```rm content
+# rm content
+#!/bin/bash
+echo "hahaha exploited it"
+cat /flag
+```
+```bash
+hacker@path~hijacking-commands:~$ ls
+COLLEGE  PWN   data.txt     instructions  myflag	script.sh  the-flag
+Desktop  core  instruction  leap	  not-the-flag	t	   win
+hacker@path~hijacking-commands:~$ touch rm
+hacker@path~hijacking-commands:~$ vim rm 
+hacker@path~hijacking-commands:~$ chmod 777 rm
+hacker@path~hijacking-commands:~$ PATH="/home/hacker:$PATH"
+hacker@path~hijacking-commands:~$ /challenge/run 
+Trying to remove /flag...
+Found 'rm' command at /home/hacker/rm. Executing!
+its fucking safe dude
+hacker@path~hijacking-commands:~$ cat /flag 
+cat: /flag: Permission denied
+hacker@path~hijacking-commands:~$ vim rm 
+
+[No write since last change]
+ 09:26:36 up 110 days,  8:14,  0 user,  load average: 8.86, 9.81, 9.94
+USER     TTY        LOGIN@   IDLE   JCPU   PCPU WHAT
+
+Press ENTER or type command to continue
+hacker@path~hijacking-commands:~$ /challenge/run 
+Trying to remove /flag...
+Found 'rm' command at /home/hacker/rm. Executing!
+its fucking safe dude
+pwn.college{4as3IIAVZwGzY5qJ-BLhNvffTz_.QX3cjM1wCN2gjNwEzW}
+hacker@path~hijacking-commands:~$ 
+```
+
 ## References
 
 - [linux-luminarium](https://pwn.college/linux-luminarium/)
-
-</body>
-</html>
-```
 
 
