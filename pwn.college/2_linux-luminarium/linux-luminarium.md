@@ -741,6 +741,9 @@ hacker@permissions~executable-files:~$
 1 for x (execute)
 0 for - (deny)
 
+example: if ownership is rwx then number of ownership is r+w+x= 4+2+1 = 7
+         if ownership is r-x then number of ownership is r+0+x= 4+0+1 = 5
+
 hacker@permissions~permission-tweaking-practice:~$ /challenge/run 
 Round 1 of 8!
 
