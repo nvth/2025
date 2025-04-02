@@ -1,3 +1,49 @@
+```html
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+/* Style cho nút Back to Top */
+.back-to-top {
+position: fixed;
+bottom: 20px;
+right: 20px;
+background-color: #007bff;
+color: white;
+border: none;
+border-radius: 5px;
+padding: 10px 20px;
+font-size: 16px;
+cursor: pointer;
+transition: background-color 0.3s;
+}
+
+.back-to-top:hover {
+background-color: #0056b3;
+}
+</style>
+</head>
+<body>
+
+<a class="back-to-top" href="#top">Back to Top</a>
+
+<!-- Đặt id="top" ở đâu đó ở đầu trang -->
+<h1 id="top">Header</h1>
+## Map
+[Dojos](#dojos)
+### Content
+-   [1. Hello hacker](#1-hello-hacker)
+-   [2. Pondering paths](#2-pondering-paths)
+-   [3. Comprehending Commands](#3-comprehending-commands)
+-   [4. Disgesting Documentation](#4-digesting-documentation)
+-   [5. File Globbing](#5-file-globbing)
+-   [6. Practicing Piping](#6-practicing-piping)
+-   [7. Shell variable](#7-shell-variable)
+-   [8. Process and jobs](#8-process-and-jobs)
+-   [9. Perceiving permissions](#9-perceiving-permissions)
+-   [10. Untangling user](#10-untangling-users)
+-   [11. Chaining commands](#11-chaining-commands)
+-   [12](#12)
 ## Dojos
 
 ### 1. Hello hacker
@@ -1233,6 +1279,79 @@ root@permissions~the-suid-bit:~# cat /flag
 pwn.college{Y7EyaBV43y5oVgF4u6HT9OCb9_U.QXzEjN0wCN2gjNwEzW}
 root@permissions~the-suid-bit:~# 
 ```
+
+### 10. Untangling Users
+#### 10.1. Becoming root with su
+```
+hacker@users~becoming-root-with-su:~$ su
+Password: 
+root@users~becoming-root-with-su:/home/hacker# cat /flag 
+pwn.college{UH76UXrOXT-9hR7G0wvYL0siJFG.QX1UDN1wCN2gjNwEzW}
+root@users~becoming-root-with-su:/home/hacker# 
+```
+#### 10.2. Other user with su
+```
+hacker@users~other-users-with-su:~$ su zardus
+Password: 
+zardus@users~other-users-with-su:/home/hacker$ /challenge/run 
+Congratulations, you have become Zardus! Here is your flag:
+pwn.college{s7WBakfn2L7-SIYZt-FzVGALO5I.QX2UDN1wCN2gjNwEzW}
+zardus@users~other-users-with-su:/home/hacker$ 
+```
+#### 10.3. Cracking password
+```
+hacker@users~cracking-passwords:~$ john /challenge/shadow-leak 
+Created directory: /home/hacker/.john
+Loaded 1 password hash (crypt, generic crypt(3) [?/64])
+Press 'q' or Ctrl-C to abort, almost any other key for status
+aardvark         (zardus)
+1g 0:00:00:20 100% 2/3 0.04889g/s 284.7p/s 284.7c/s 284.7C/s Johnson..buzz
+Use the "--show" option to display all of the cracked passwords reliably
+Session completed
+hacker@users~cracking-passwords:~$ su zardus
+Password: 
+zardus@users~cracking-passwords:/home/hacker$ cat /flag 
+cat: /flag: Permission denied
+zardus@users~cracking-passwords:/home/hacker$ /challenge/run 
+Congratulations, you have become Zardus! Here is your flag:
+pwn.college{sB6n173XAosAQMm3bbogEoyoJc_.QX3UDN1wCN2gjNwEzW}
+zardus@users~cracking-passwords:/home/hacker$ 
+```
+#### 10.4. Using sudo
+```
+hacker@users~using-sudo:~$ sudo cat /flag 
+pwn.college{4PJ4aLIe2WpjtRoOAibxdaKHfcM.QX4UDN1wCN2gjNwEzW}
+hacker@users~using-sudo:~$
+```
+### 11. Chaining commands
+#### 11.1. Chaining with Semicolons
+```
+hacker@chaining~chaining-with-semicolons:~$ /challenge/pwn ; /challenge/college 
+Yes! You chained /challenge/pwn and /challenge/college! Here is your flag:
+pwn.college{AoAKwDaHqWXpMw3m2z3FDOgvDbt.QX1UDO0wCN2gjNwEzW}
+hacker@chaining~chaining-with-semicolons:~$ 
+```
+#### 11.2. Your first shell script
+```
+using neo vim to edit
+save with :w > Enter
+quite neo vim :q > Enter
+```
+```bash
+#!/bin/bash
+
+/challenge/pwn
+/challenge/college
+```
+```
+bash x.sh
+```
 ## References
 
 - [linux-luminarium](https://pwn.college/linux-luminarium/)
+
+</body>
+</html>
+```
+
+
