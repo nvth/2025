@@ -2,8 +2,8 @@
 [Dojos](#dojos)
 ### Content
 -   [1. Your First Program](#1-your-first-program)
--   [2. ](#)
--   [3. ](#)
+-   [2. Software Introspection](#2-software-introspection)
+-   [3. Computer Memory](#3-computer-memory)
 -   [4. ](#)
 -   [5. ](#)
 -   [6. ](#)
