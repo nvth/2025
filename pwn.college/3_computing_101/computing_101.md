@@ -572,3 +572,281 @@ pwn.college{0qb21KsPoHUDRfiEKglVyxV9CnA.QX1QTO1wCN2gjNwEzW}
 hacker@memory~dereferencing-with-offsets:~/pwnc/offet$ 
 ---
 ```
+#### 3.6. Stored Address
+```bash
+hacker@memory~stored-addresses:~/pwnc/sa$ /challenge/check sa.s 
+
+Checking the assembly code...
+... YES! Great job!
+
+Let's check what your exit code is! It should be our secret
+value pointed to by a chain of pointers starting at address 20150781!
+
+hacker@memory~stored-addresses:/home/hacker/pwnc/sa$ /tmp/your-program
+hacker@memory~stored-addresses:/home/hacker/pwnc/sa$ echo $?
+64
+hacker@memory~stored-addresses:/home/hacker/pwnc/sa$ 
+
+Neat! Your program passed the tests! Great job!
+
+Here is your flag!
+pwn.college{IE0qw86Mcpk1Twv5EVjHLTfMdiO.QXzMTO1wCN2gjNwEzW}
+
+hacker@memory~stored-addresses:~/pwnc/sa$ cat sa.s 
+mov rdi, [567800]
+mov rdi, [rdi]
+mov rax, 60
+syscall
+hacker@memory~stored-addresses:~/pwnc/sa$ 
+```
+#### 3.7. Double Dereference
+```bash
+hacker@memory~double-dereference:~/pwnc/dd$ /challenge/check dd.s 
+
+Checking the assembly code...
+... YES! Great job!
+
+Let's check what your exit code is! It should be our secret
+value pointed to by a chain of pointers starting at rax!
+
+hacker@memory~double-dereference:/home/hacker/pwnc/dd$ /tmp/your-program
+hacker@memory~double-dereference:/home/hacker/pwnc/dd$ echo $?
+75
+hacker@memory~double-dereference:/home/hacker/pwnc/dd$ 
+
+Neat! Your program passed the tests! Great job!
+
+Here is your flag!
+pwn.college{EAhaLoMtAxPKbUdJXHy0wVxOhoP.QX0MTO1wCN2gjNwEzW}
+
+hacker@memory~double-dereference:~/pwnc/dd$ cat dd.s 
+mov rdi, [rax]   //mov rdi, [rax] get content from register rax 133700   
+mov rdi, [rdi] //mov rdi, [rdi] get content from register rdi 123400   
+mov rax, 60  // throw rdi using exit code
+syscall
+hacker@memory~double-dereference:~/pwnc/dd$ 
+```
+#### 3.8. Triple Dereference
+```bash
+hacker@memory~triple-dereference:~/pwnc/td$ /challenge/check td.s 
+
+Checking the assembly code...
+... YES! Great job!
+
+Let's check what your exit code is! It should be our secret
+value pointed to by a chain of pointers starting at rdi!
+
+hacker@memory~triple-dereference:/home/hacker/pwnc/td$ /tmp/your-program
+hacker@memory~triple-dereference:/home/hacker/pwnc/td$ echo $?
+70
+hacker@memory~triple-dereference:/home/hacker/pwnc/td$ 
+
+Neat! Your program passed the tests! Great job!
+
+Here is your flag!
+pwn.college{g2wP08Fs5cDnD7yFDZYm_uCn95G.QXzQTO1wCN2gjNwEzW}
+
+hacker@memory~triple-dereference:~/pwnc/td$ cat td.s 
+mov rdi, [rdi]
+mov rdi, [rdi]
+mov rdi, [rdi]
+mov rax, 60
+syscall
+hacker@memory~triple-dereference:~/pwnc/td$ 
+```
+### 4. Hello hackers
+#### 4.1. Write Output
+```bash
+hacker@hello-hackers~writing-output:~/hellowhacker/writing$ /challenge/check wo.s 
+
+Checking the assembly code...
+... YES! Great job!
+
+Let's check what your exit code is! It should be our secret value
+stored at memory address 1337000 (the letter H) to succeed!
+
+hacker@hello-hackers~writing-output:/home/hacker/hellowhacker/writing$ /tmp/your-program
+HSegmentation fault (core dumped)
+hacker@hello-hackers~writing-output:/home/hacker/hellowhacker/writing$ 
+
+
+Wow, you wrote an "H"!!!!!!! But why did your program crash? Well, you didn't
+exit, and as before, the CPU kept executing and eventually crashed. In the next
+level, we will learn how to chain two system calls togeter: write and exit!
+
+
+Here is your flag!
+pwn.college{4LReGv0hyzZf6xnp_5tHfkGRlRh.QXwUTN2wCN2gjNwEzW}
+
+hacker@hello-hackers~writing-output:~/hellowhacker/writing$ 
+
+
+cat
+mov rsi, 1337000
+mov rdi, 1
+mov rdi, 1
+mov rax, 1
+syscall
+```
+#### 4.2. Chaining Syscalls
+```bash
+hacker@hello-hackers~chaining-syscalls:~/pwnc/cs$ /challenge/check csv.s 
+
+Checking the assembly code...
+... YES! Great job!
+
+Let's check what your exit code is! It should be our secret value
+stored at memory address 1337000 (the letter H) to succeed!
+
+hacker@hello-hackers~chaining-syscalls:/home/hacker/pwnc/cs$ /tmp/your-program
+Hhacker@hello-hackers~chaining-syscalls:/home/hacker/pwnc/cs$ 
+
+YES! You wrote an 'H' and cleanly exited! Great job!
+
+Here is your flag!
+pwn.college{k_42Vvvr8pXfm5MVo7DOt-08oRw.QXxUTN2wCN2gjNwEzW}
+
+hacker@hello-hackers~chaining-syscalls:~/pwnc/cs$ cat csv.s 
+mov rax, 1  ; syscall write (rdi, rsi, rdx)
+mov rdi, 1  ; set rdi = 1 (FD - 0/1/2)
+mov rsi, 1337000    ; set rsi = 1337000 (address secret value)
+mov rdx, 1  ;   set rdx = 1 (character byte)
+syscall ;   syscall
+
+mov rax, 60 ;   set rax = 60 (exit code)
+mov rdi, 42 ;   set rdi = 42 (exit code )
+syscall ;   syscall
+hacker@hello-hackers~chaining-syscalls:~/pwnc/cs$ 
+```
+#### 4.3. Writing Strings
+```bash
+hacker@hello-hackers~writing-strings:~/pwnc/ws$ /challenge/check ws.s 
+
+Checking the assembly code...
+... YES! Great job!
+
+Let's check what your exit code is! It should be our secret value
+stored at memory address 1337000 (the string "Hello Hackers!" ) to succeed!
+
+hacker@hello-hackers~writing-strings:/home/hacker/pwnc/ws$ /tmp/your-program
+Hello Hackers!hacker@hello-hackers~writing-strings:/home/hacker/pwnc/ws$ 
+
+YES! You wrote a "Hello Hackers" and cleanly exited! Great job!
+
+Here is your flag!
+pwn.college{QVmlTK9KA_uN9bc57iyTUAj4zaN.01NzEDMxwCN2gjNwEzW}
+
+hacker@hello-hackers~writing-strings:~/pwnc/ws$ cat ws.s 
+mov rax, 1  ;   call sys write
+mov rdi, 1  ;   set FD = 1
+mov rsi, 1337000    ;   set address = 1337000
+mov rdx, 14 ;   set length char 14
+syscall
+mov rax, 60 ; exitcode
+mov rdi, 42 ; exit code
+syscall
+hacker@hello-hackers~writing-strings:~/pwnc/ws$ 
+```
+#### 4.4. ReaDING dATa
+```bash
+hacker@hello-hackers~reading-data:~/pwnc/rd$ /challenge/check rd.s 
+
+Checking the assembly code...
+... YES! Great job!
+
+Let's check what your output is! It should be our secret value, b'ItcyaOGp',
+as passed into the stdin of your program!
+
+hacker@hello-hackers~reading-data:/home/hacker/pwnc/rd$ /tmp/your-program
+ItcyaOGp
+hacker@hello-hackers~reading-data:/home/hacker/pwnc/rd$ 
+
+YES! You wrote the data and cleanly exited! Great job!
+
+Here is your flag!
+pwn.college{8FckmaMMUgolNRXn8lPleXcwB7p.0FNwUTNxwCN2gjNwEzW}
+
+hacker@hello-hackers~reading-data:~/pwnc/rd$ cat rd.s 
+mov rax, 0  ;   call sys_read
+mov rdi, 0  ;   set fd = 0 (stdin)
+mov rsi, 1337000    ;   set addr 1337000
+mov rdx, 8  ;   set rdx = 8 byte
+syscall
+
+mov rax, 1 ; call sys_write
+mov rdi, 1  ;   set fd = 1 (stout)
+mov rsi, rsi    ;   set addr = rsi sys_read
+mov rdx, rdx    ;   set lenght = rdx sys_read
+syscall
+
+mov rax, 60
+mov rdi, 42
+syscall
+hacker@hello-hackers~reading-data:~/pwnc/rd$ 
+```
+### 5. Assembly Crash course
+#### 5.1. set-register
+```bash
+hacker@assembly-crash-course~set-register:~/pwnc/acc/set-r$ /challenge/run sr
+
+In this level you will be working with registers. You will be asked to modify
+or read from registers.
+
+
+In this level you will work with registers! Please set the following:
+  rdi = 0x1337
+
+Extracting binary code from provided ELF file...
+Did not find any GOT entries
+Executing your code...
+---------------- CODE ----------------
+0x400000:	mov   	rdi, 0x1337
+0x400007:	mov   	rax, 0x3c
+0x40000e:	syscall	
+--------------------------------------
+pwn.college{AcBTw-OVkx0eI_1MiiGXzFmkrHT.dRTOxwCN2gjNwEzW}
+
+hacker@assembly-crash-course~set-register:~/pwnc/acc/set-r$ cat sr.s
+.intel_syntax noprefix  ;   intel syntax
+.global _start  ;   start var
+_start:
+mov rdi, 0x1337    ;    set rdi  = 0x1337
+mov rax, 60 ;   set rax exit code
+syscall
+hacker@assembly-crash-course~set-register:~/pwnc/acc/set-r$ 
+```
+#### 5.2. set-multiple-register
+```bash
+hacker@assembly-crash-course~set-multiple-registers:~/pwnc/acc/smr$ as -o smr smr.s 
+hacker@assembly-crash-course~set-multiple-registers:~/pwnc/acc/smr$ /challenge/run smr
+
+In this level you will be working with registers. You will be asked to modify
+or read from registers.
+
+
+In this level you will work with multiple registers. Please set the following:
+  rax = 0x1337
+  r12 = 0xCAFED00D1337BEEF
+  rsp = 0x31337
+
+Extracting binary code from provided ELF file...
+Did not find any GOT entries
+Executing your code...
+---------------- CODE ----------------
+0x400000:	mov   	rax, 0x1337
+0x400007:	movabs	r12, 0xcafed00d1337beef
+0x400011:	mov   	rsp, 0x31337
+--------------------------------------
+pwn.college{MugCAeP4_iDhFeAV-5OGOI1Oc_s.QXwEDOzwCN2gjNwEzW}
+
+hacker@assembly-crash-course~set-multiple-registers:~/pwnc/acc/smr$ cat smr.s 
+.intel_syntax noprefix
+.global _start
+_start:
+mov rax, 0x1337
+mov r12, 0xCAFED00D1337BEEF
+mov rsp, 0x31337
+
+hacker@assembly-crash-course~set-multiple-registers:~/pwnc/acc/smr$ 
+```
+#### 5.3. add-to-register
