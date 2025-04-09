@@ -850,3 +850,307 @@ mov rsp, 0x31337
 hacker@assembly-crash-course~set-multiple-registers:~/pwnc/acc/smr$ 
 ```
 #### 5.3. add-to-register
+```bash
+acker@assembly-crash-course~add-to-register:~/pwnc/add-to-r$ vim atr.s 
+hacker@assembly-crash-course~add-to-register:~/pwnc/add-to-r$ as -o atr.o atr.s
+hacker@assembly-crash-course~add-to-register:~/pwnc/add-to-r$ /challenge/run atr.o 
+
+In this level you will be working with registers. You will be asked to modify
+or read from registers.
+
+We will now set some values in memory dynamically before each run. On each run
+the values will change. This means you will need to do some type of formulaic
+operation with registers. We will tell you which registers are set beforehand
+and where you should put the result. In most cases, its rax.
+
+
+Many instructions exist in x86 that allow you to do all the normal
+math operations on registers and memory.
+
+For shorthand, when we say A += B, it really means A = A + B.
+
+Here are some useful instructions:
+  add reg1, reg2       <=>     reg1 += reg2
+  sub reg1, reg2       <=>     reg1 -= reg2
+  imul reg1, reg2      <=>     reg1 *= reg2
+
+div is more complicated and we will discuss it later.
+Note: all 'regX' can be replaced by a constant or memory location
+
+Do the following:
+  add 0x331337 to rdi
+
+We will now set the following in preparation for your code:
+  rdi = 0x92b
+
+Extracting binary code from provided ELF file...
+Did not find any GOT entries
+Executing your code...
+---------------- CODE ----------------
+0x400000:	add   	rdi, 0x331337
+--------------------------------------
+pwn.college{U4ofZa_-dZQYK0J-o2mNWbQPd5N.dVTOxwCN2gjNwEzW}
+
+hacker@assembly-crash-course~add-to-register:~/pwnc/add-to-r$ cat atr.s 
+.intel_syntax noprefix
+.global _start
+_start:
+add rdi, 0x331337
+hacker@assembly-crash-course~add-to-register:~/pwnc/add-to-r$ 
+```
+#### 5.4. linear-equation-registers
+```bash
+hacker@assembly-crash-course~linear-equation-registers:~/pwnc/ler$ python3 ler.py 
+[+] Starting local process '/challenge/run': pid 427
+[+] Receiving all data: Done (1.30KB)
+[*] Process '/challenge/run' stopped with exit code 0 (pid 427)
+[+] Receiving all data: Done (0B)
+b''hacker@assembly-crash-course~linear-equation-registers:~/pwnc/ler$ vim ler.py
+hacker@assembly-crash-course~linear-equation-registers:~/pwnc/ler$ python3 ler.py 
+[+] Starting local process '/challenge/run': pid 449
+[+] Receiving all data: Done (1.30KB)
+[*] Process '/challenge/run' stopped with exit code 0 (pid 449)
+In this level you will be working with registers. You will be asked to modify
+or read from registers.
+
+We will now set some values in memory dynamically before each run. On each run
+the values will change. This means you will need to do some type of formulaic
+operation with registers. We will tell you which registers are set beforehand
+and where you should put the result. In most cases, its rax.
+
+
+Using your new knowledge, please compute the following:
+  f(x) = mx + b, where:
+    m = rdi
+    x = rsi
+    b = rdx
+
+Place the result into rax.
+
+Note: there is an important difference between mul (unsigned
+multiply) and imul (signed multiply) in terms of which
+registers are used. Look at the documentation on these
+instructions to see the difference.
+
+In this case, you will want to use imul.
+
+We will now set the following in preparation for your code:
+  rdi = 0x1321
+  rsi = 0x26ce
+  rdx = 0x6d8
+
+You ran me without an argument. You can re-run with `/challenge/run /path/to/your/elf` to input an ELF file, or just give me your assembled and extracted code in bytes (up to 0x1000 bytes): 
+Executing your code...
+---------------- CODE ----------------
+0x400000:	imul  	rdi, rsi
+0x400004:	add   	rdi, rdx
+0x400007:	mov   	rax, rdi
+--------------------------------------
+pwn.college{AOnejllgU1MRydSk4MyCkWbzpg4.dZTOxwCN2gjNwEzW}
+hacker@assembly-crash-course~linear-equation-registers:~/pwnc/ler$ cat ler.py 
+from pwn import *
+context.update(arch='amd64')
+code = asm("""
+imul rdi, rsi
+add rdi, rdx
+mov rax, rdi
+""")
+p = process('/challenge/run')
+p.write(code)
+
+output = p.readall()
+clean_output = output.decode().strip()
+print(clean_output, end='')
+
+p.close()
+
+hacker@assembly-crash-course~linear-equation-registers:~/pwnc/ler$ 
+
+```
+#### 5.5. integer-division
+```bash
+hacker@assembly-crash-course~integer-division:~/pwnc/id$ vim id.py
+hacker@assembly-crash-course~integer-division:~/pwnc/id$ python3 id.py 
+[+] Starting local process '/challenge/run': pid 394
+[+] Receiving all data: Done (1.97KB)
+[*] Process '/challenge/run' stopped with exit code 0 (pid 394)
+In this level you will be working with registers. You will be asked to modify
+or read from registers.
+
+We will now set some values in memory dynamically before each run. On each run
+the values will change. This means you will need to do some type of formulaic
+operation with registers. We will tell you which registers are set beforehand
+and where you should put the result. In most cases, its rax.
+
+
+Division in x86 is more special than in normal math. Math in here is
+called integer math. This means every value is a whole number.
+
+As an example: 10 / 3 = 3 in integer math.
+
+Why?
+
+Because 3.33 is rounded down to an integer.
+
+The relevant instructions for this level are:
+  mov rax, reg1; div reg2
+
+Note: div is a special instruction that can divide
+a 128-bit dividend by a 64-bit divisor, while
+storing both the quotient and the remainder, using only one register as an operand.
+
+How does this complex div instruction work and operate on a
+128-bit dividend (which is twice as large as a register)?
+
+For the instruction: div reg, the following happens:
+  rax = rdx:rax / reg
+  rdx = remainder
+
+rdx:rax means that rdx will be the upper 64-bits of
+the 128-bit dividend and rax will be the lower 64-bits of the
+128-bit dividend.
+
+You must be careful about what is in rdx and rax before you call div.
+
+Please compute the following:
+  speed = distance / time, where:
+    distance = rdi
+    time = rsi
+    speed = rax
+
+Note that distance will be at most a 64-bit value, so rdx should be 0 when dividing.
+
+We will now set the following in preparation for your code:
+  rdi = 0x1230
+  rsi = 0x2a
+
+You ran me without an argument. You can re-run with `/challenge/run /path/to/your/elf` to input an ELF file, or just give me your assembled and extracted code in bytes (up to 0x1000 bytes): 
+Executing your code...
+---------------- CODE ----------------
+0x400000:	mov   	rax, rdi
+0x400003:	div   	rsi
+0x400006:	mov   	rdx, rax
+--------------------------------------
+pwn.college{Y2KBhnCu8DDM-XbVzDi8Zrtf6fO.ddTOxwCN2gjNwEzW}
+hacker@assembly-crash-course~integer-division:~/pwnc/id$ 
+```
+#### 5.6. module-operation
+```bash
+hacker@assembly-crash-course~modulo-operation:~/pwnc/mod$ python3 mod.py 
+[+] Starting local process '/challenge/run': pid 372
+[+] Receiving all data: Done (1.25KB)
+[*] Process '/challenge/run' stopped with exit code 0 (pid 372)
+In this level you will be working with registers. You will be asked to modify
+or read from registers.
+
+We will now set some values in memory dynamically before each run. On each run
+the values will change. This means you will need to do some type of formulaic
+operation with registers. We will tell you which registers are set beforehand
+and where you should put the result. In most cases, its rax.
+
+
+Modulo in assembly is another interesting concept!
+
+x86 allows you to get the remainder after a div operation.
+
+For instance: 10 / 3 -> remainder = 1
+
+The remainder is the same as modulo, which is also called the "mod" operator.
+
+In most programming languages we refer to mod with the symbol '%'.
+
+Please compute the following:
+  rdi % rsi
+
+Place the value in rax.
+
+We will now set the following in preparation for your code:
+  rdi = 0x34bd603c
+  rsi = 0x3
+
+You ran me without an argument. You can re-run with `/challenge/run /path/to/your/elf` to input an ELF file, or just give me your assembled and extracted code in bytes (up to 0x1000 bytes): 
+Executing your code...
+---------------- CODE ----------------
+0x400000:	mov   	rax, rdi
+0x400003:	div   	rsi
+0x400006:	mov   	rax, rdx
+--------------------------------------
+pwn.college{IXZM-iBG5OhEcnSkvTq8eqMqb47.dhTOxwCN2gjNwEzW}
+hacker@assembly-crash-course~modulo-operation:~/pwnc/mod$ 
+```
+#### 5.7. set-upper-byte
+```bash
+Using only one move instruction, please set the upper 8 bits of the ax register to 0x42.
+
+ax = ah + al
+==> 8 bits upper is ah
+
+logfile
+
+hacker@assembly-crash-course~set-upper-byte:~/pwnc$ python3 sub.py
+[+] Starting local process '/challenge/run': pid 380
+[+] Receiving all data: Done (1.84KB)
+[*] Process '/challenge/run' stopped with exit code 0 (pid 380)
+In this level you will be working with registers. You will be asked to modify
+or read from registers.
+
+We will now set some values in memory dynamically before each run. On each run
+the values will change. This means you will need to do some type of formulaic
+operation with registers. We will tell you which registers are set beforehand
+and where you should put the result. In most cases, its rax.
+
+
+Another cool concept in x86 is the ability to independently access to lower register bytes.
+
+Each register in x86_64 is 64 bits in size, and in the previous levels we have accessed
+the full register using rax, rdi or rsi.
+
+We can also access the lower bytes of each register using different register names.
+
+For example the lower 32 bits of rax can be accessed using eax, the lower 16 bits using ax,
+the lower 8 bits using al.
+
+MSB                                    LSB
++----------------------------------------+
+|                   rax                  |
++--------------------+-------------------+
+                     |        eax        |
+                     +---------+---------+
+                               |   ax    |
+                               +----+----+
+                               | ah | al |
+                               +----+----+
+
+Lower register bytes access is applicable to almost all registers.
+
+Using only one move instruction, please set the upper 8 bits of the ax register to 0x42.
+
+We will now set the following in preparation for your code:
+  rax = 0xdda09a77c81a008d
+
+You ran me without an argument. You can re-run with `/challenge/run /path/to/your/elf` to input an ELF file, or just give me your assembled and extracted code in bytes (up to 0x1000 bytes): 
+Executing your code...
+---------------- CODE ----------------
+0x400000:	mov   	ah, 0x42
+--------------------------------------
+pwn.college{sLNIxACRPnF-v7RYifSXHgFuhFT.QXxEDOzwCN2gjNwEzW}
+
+hacker@assembly-crash-course~set-upper-byte:~/pwnc$ cat sub.py
+from pwn import *
+
+
+context.update(arch='amd64') #amd64 syntax
+code = asm("""
+mov ah, 0x42
+""")
+p = process('/challenge/run')
+p.write(code)
+
+output = p.readall()
+clean_output = output.decode().strip()
+print(clean_output, end='')
+
+p.close()
+hacker@assembly-crash-course~set-upper-byte:~/pwnc$ 
+```
+#### 5.8. effication-modulo

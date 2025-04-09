@@ -1,0 +1,17 @@
+from pwn import *
+
+
+context.update(arch='amd64') #amd64 syntax
+code = asm("""
+imul rdi, rsi
+add rdi, rdx
+mov rax, rdi
+""")
+p = process('/challenge/run')
+p.write(code)
+
+output = p.readall()
+clean_output = output.decode().strip()
+print(clean_output, end='')
+
+p.close()
